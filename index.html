@@ -24,24 +24,46 @@
     <!-- BARRA SUPERIOR (HEADER) COM CONTROLES -->
     <header class="topbar" role="banner">
       <div class="brand-badge">
-        <span class="brand-icon" aria-hidden="true">🧠</span>
+        <span class="brand-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
+            <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
+          </svg>
+        </span>
         <span>QuizMaster</span>
       </div>
 
       <div class="topbar-controls">
         <!-- Botão Abrir Placar -->
         <button id="btn-open-leaderboard" class="icon-btn" title="Ver Placar de Líderes" aria-label="Ver Placar de Líderes">
-          🏆
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
         </button>
 
         <!-- Botão Alternar Efeitos Sonoros -->
         <button id="btn-toggle-sound" class="icon-btn" title="Ativar/Desativar Som" aria-label="Alternar Efeitos Sonoros">
-          <span id="sound-icon">🔊</span>
+          <span id="sound-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+          </span>
         </button>
 
         <!-- Botão Alternar Tema Claro/Escuro -->
         <button id="btn-toggle-theme" class="icon-btn" title="Alternar Modo Escuro" aria-label="Alternar Tema Claro e Escuro">
-          <span id="theme-icon">🌙</span>
+          <span id="theme-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+          </span>
         </button>
       </div>
     </header>
@@ -60,7 +82,11 @@
         <!-- Nome do Jogador -->
         <div class="form-group">
           <label for="player-name-input" class="form-label">
-            <span>👤</span> Seu Nome ou Apelido:
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Seu Nome ou Apelido:</span>
           </label>
           <input 
             type="text" 
@@ -76,32 +102,42 @@
         <!-- Categoria das Perguntas -->
         <div class="form-group">
           <label for="category-select" class="form-label">
-            <span>🎯</span> Escolha o Tema:
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="6"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+            <span>Escolha o Tema:</span>
           </label>
           <select id="category-select" class="form-select">
-            <option value="todas">🎲 Misto (Todas as Categorias)</option>
-            <option value="programacao">💻 Programação & Tecnologia</option>
-            <option value="ciencia">🔬 Ciência & Espaço</option>
-            <option value="gerais">🌍 Conhecimentos Gerais</option>
-            <option value="historia">🏛️ História & Geografia</option>
+            <option value="todas">Misto (Todas as Categorias)</option>
+            <option value="programacao">Programação & Tecnologia</option>
+            <option value="ciencia">Ciência & Espaço</option>
+            <option value="gerais">Conhecimentos Gerais</option>
+            <option value="historia">História & Geografia</option>
           </select>
         </div>
 
         <!-- Grau de Dificuldade -->
         <div class="form-group">
-          <span class="form-label"><span>⚡</span> Nível de Dificuldade:</span>
+          <span class="form-label">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>Nível de Dificuldade:</span>
+          </span>
           <div class="pills-group" role="radiogroup" aria-label="Dificuldade">
             <label class="pill-option">
               <input type="radio" name="difficulty" value="todas" checked>
-              <span class="pill-label">🎲 Todas</span>
+              <span class="pill-label">Todas</span>
             </label>
             <label class="pill-option">
               <input type="radio" name="difficulty" value="facil">
-              <span class="pill-label">🌱 Fácil</span>
+              <span class="pill-label">Fácil</span>
             </label>
             <label class="pill-option">
               <input type="radio" name="difficulty" value="medio">
-              <span class="pill-label">⚖️ Médio</span>
+              <span class="pill-label">Médio</span>
             </label>
           </div>
         </div>
@@ -109,7 +145,15 @@
         <!-- Quantidade de Questões -->
         <div class="form-group">
           <label for="amount-select" class="form-label">
-            <span>🔢</span> Número de Perguntas:
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <line x1="8" x2="21" y1="6" y2="6"/>
+              <line x1="8" x2="21" y1="12" y2="12"/>
+              <line x1="8" x2="21" y1="18" y2="18"/>
+              <line x1="3" x2="3.01" y1="6" y2="6"/>
+              <line x1="3" x2="3.01" y1="12" y2="12"/>
+              <line x1="3" x2="3.01" y1="18" y2="18"/>
+            </svg>
+            <span>Número de Perguntas:</span>
           </label>
           <select id="amount-select" class="form-select">
             <option value="5">5 Perguntas (Rápido - ~2 min)</option>
@@ -121,7 +165,10 @@
         <!-- Ação Iniciar -->
         <div class="welcome-actions">
           <button type="submit" id="btn-start-quiz" class="btn btn-primary btn-block">
-            <span>🚀</span> Iniciar Quiz
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>Iniciar Quiz</span>
           </button>
         </div>
       </form>
@@ -139,15 +186,23 @@
       <!-- Cabeçalho Informativo da Pergunta -->
       <div class="quiz-header">
         <div class="header-badges">
-          <span id="badge-category" class="badge">💻 Categoria</span>
+          <span id="badge-category" class="badge">Categoria</span>
           <span id="badge-counter" class="badge">Pergunta 1 de 10</span>
-          <span id="badge-streak" class="badge badge-streak" title="Sequência de Acertos">🔥 x2 Bônus</span>
+          <span id="badge-streak" class="badge badge-streak" title="Sequência de Acertos">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon app-icon-sm">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+            <span id="streak-text">x2 Bônus</span>
+          </span>
         </div>
 
         <div class="header-badges">
           <!-- Temporizador Regressivo -->
           <div id="timer-box" class="timer-box" role="timer" aria-label="Tempo restante">
-            <span aria-hidden="true">⏱️</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon app-icon-sm" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
             <span id="timer-seconds">15s</span>
           </div>
           <!-- Pontuação Atual -->
@@ -171,7 +226,12 @@
       <!-- Caixa de Explicação Didática (Aparece após responder) -->
       <div id="explanation-box" class="explanation-box" role="region" aria-live="assertive">
         <div class="explanation-title">
-          <span>💡</span> Você sabia?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+            <path d="M9 18h6"/>
+            <path d="M10 22h4"/>
+          </svg>
+          <span>Explicação:</span>
         </div>
         <p id="explanation-text">Explicação educativa sobre a resposta correta.</p>
       </div>
@@ -183,7 +243,11 @@
         </div>
 
         <button id="btn-next-question" class="btn btn-primary" disabled>
-          <span>Avançar</span> ➔
+          <span>Avançar</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <line x1="5" x2="19" y1="12" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
         </button>
       </div>
     </section>
@@ -193,7 +257,9 @@
          ==================================================================== -->
     <section id="screen-results" class="screen animate-slide-up" aria-label="Resultados da Partida">
       <div class="result-header">
-        <div id="result-trophy" class="trophy-icon" aria-hidden="true">🏆</div>
+        <div id="result-trophy" class="trophy-container" aria-hidden="true">
+          <!-- Renderizado via JS / Icons -->
+        </div>
         <h2 id="result-title" class="result-title">Excelente Desempenho!</h2>
         <p id="result-message" class="result-subtitle">Você demonstrou grande domínio nos tópicos!</p>
       </div>
@@ -212,7 +278,11 @@
       <!-- Grade de Métricas e Estatísticas -->
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-icon" aria-hidden="true">🎯</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
           <div class="stat-info">
             <span id="stat-score" class="stat-value">0</span>
             <span class="stat-label">Pontos Obtidos</span>
@@ -220,7 +290,12 @@
         </div>
 
         <div class="stat-card">
-          <div class="stat-icon" aria-hidden="true">✅</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
           <div class="stat-info">
             <span id="stat-hits" class="stat-value">0/10</span>
             <span class="stat-label">Perguntas Corretas</span>
@@ -228,7 +303,11 @@
         </div>
 
         <div class="stat-card">
-          <div class="stat-icon" aria-hidden="true">🔥</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+          </div>
           <div class="stat-info">
             <span id="stat-streak" class="stat-value">0</span>
             <span class="stat-label">Maior Sequência</span>
@@ -236,7 +315,12 @@
         </div>
 
         <div class="stat-card">
-          <div class="stat-icon" aria-hidden="true">⏳</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
           <div class="stat-info">
             <span id="stat-time" class="stat-value">00:00</span>
             <span class="stat-label">Tempo Total Gasto</span>
@@ -247,16 +331,38 @@
       <!-- Botões de Ação Final -->
       <div class="result-actions">
         <button id="btn-restart-quiz" class="btn btn-primary btn-block">
-          <span>🔄</span> Jogar Novamente
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+          <span>Jogar Novamente</span>
         </button>
         <button id="btn-review-answers" class="btn btn-secondary btn-block">
-          <span>📝</span> Revisar Minhas Respostas
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" x2="8" y1="13" y2="13"/>
+            <line x1="16" x2="8" y1="17" y2="17"/>
+            <line x1="10" x2="8" y1="9" y2="9"/>
+          </svg>
+          <span>Revisar Minhas Respostas</span>
         </button>
         <button id="btn-share-score" class="btn btn-outline btn-block">
-          <span>📤</span> Compartilhar Desempenho
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/>
+            <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+          </svg>
+          <span>Compartilhar Desempenho</span>
         </button>
         <button id="btn-back-home" class="btn btn-secondary btn-block">
-          <span>🏠</span> Menu Principal
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Menu Principal</span>
         </button>
       </div>
     </section>
@@ -268,9 +374,22 @@
       <div class="modal-card">
         <div class="modal-header">
           <h3 id="leaderboard-title" class="modal-title">
-            <span>🏆</span> Placar de Líderes
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon" style="color: var(--warning);">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
+            <span>Placar de Líderes</span>
           </h3>
-          <button id="btn-close-leaderboard" class="icon-btn" aria-label="Fechar ranking">✕</button>
+          <button id="btn-close-leaderboard" class="icon-btn" aria-label="Fechar ranking">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <line x1="18" x2="6" y1="6" y2="18"/>
+              <line x1="6" x2="18" y1="6" y2="18"/>
+            </svg>
+          </button>
         </div>
         <div class="modal-body">
           <div id="leaderboard-content" class="leaderboard-list">
@@ -279,7 +398,13 @@
         </div>
         <div class="modal-footer">
           <button id="btn-clear-leaderboard" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
-            🗑️ Limpar Placar
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon app-icon-sm">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <line x1="10" x2="10" y1="11" y2="17"/>
+              <line x1="14" x2="14" y1="11" y2="17"/>
+            </svg>
+            <span>Limpar Placar</span>
           </button>
           <button id="btn-ok-leaderboard" class="btn btn-secondary">
             Fechar
@@ -295,9 +420,21 @@
       <div class="modal-card">
         <div class="modal-header">
           <h3 id="review-title" class="modal-title">
-            <span>📝</span> Revisão da Partida
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon" style="color: var(--primary);">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" x2="8" y1="13" y2="13"/>
+              <line x1="16" x2="8" y1="17" y2="17"/>
+              <line x1="10" x2="8" y1="9" y2="9"/>
+            </svg>
+            <span>Revisão da Partida</span>
           </h3>
-          <button id="btn-close-review" class="icon-btn" aria-label="Fechar revisão">✕</button>
+          <button id="btn-close-review" class="icon-btn" aria-label="Fechar revisão">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="app-icon">
+              <line x1="18" x2="6" y1="6" y2="18"/>
+              <line x1="6" x2="18" y1="6" y2="18"/>
+            </svg>
+          </button>
         </div>
         <div class="modal-body">
           <div id="review-content" class="review-list">
@@ -314,7 +451,7 @@
 
     <!-- NOTIFICAÇÃO TOAST FLUTUANTE -->
     <div id="toast" class="toast" role="status" aria-live="polite">
-      <span id="toast-icon">ℹ️</span>
+      <span id="toast-icon"></span>
       <span id="toast-text">Mensagem de notificação</span>
     </div>
 
@@ -328,6 +465,7 @@
   <!-- ====================================================================
        SCRIPTS JAVASCRIPT MODULARES
        ==================================================================== -->
+  <script src="js/icons.js"></script>
   <script src="js/questions.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/storage.js"></script>

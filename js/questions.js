@@ -21,7 +21,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 1,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Qual linguagem é executada nativamente em todos os navegadores modernos para criar interatividade?",
@@ -32,7 +32,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 2,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "O que significa a sigla HTML?",
@@ -48,7 +48,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 3,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "No CSS, qual propriedade é utilizada para criar layouts flexíveis e bidirecionais modernos?",
@@ -59,7 +59,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 4,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Em JavaScript, qual método de array cria um novo array transformando cada elemento do original?",
@@ -70,7 +70,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 5,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "dificil",
     difficultyLabel: "Difícil",
     question: "Qual mecanismo do JavaScript move declarações de funções e variáveis 'var' para o topo do seu escopo durante a compilação?",
@@ -81,7 +81,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 6,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "dificil",
     difficultyLabel: "Difícil",
     question: "Qual estrutura armazena pares de chave-valor em JavaScript preservando a ordem de inserção e permitindo qualquer tipo de dado como chave?",
@@ -96,7 +96,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 7,
     category: "ciencia",
-    categoryLabel: "🔬 Ciência & Espaço",
+    categoryLabel: "Ciência & Espaço",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Qual é o planeta mais próximo do Sol no nosso Sistema Solar?",
@@ -107,7 +107,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 8,
     category: "ciencia",
-    categoryLabel: "🔬 Ciência & Espaço",
+    categoryLabel: "Ciência & Espaço",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Qual é o gás mais abundante na atmosfera terrestre?",
@@ -118,7 +118,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 9,
     category: "ciencia",
-    categoryLabel: "🔬 Ciência & Espaço",
+    categoryLabel: "Ciência & Espaço",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Aproximadamente quantos minutos a luz do Sol leva para chegar até a Terra?",
@@ -129,7 +129,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 10,
     category: "ciencia",
-    categoryLabel: "🔬 Ciência & Espaço",
+    categoryLabel: "Ciência & Espaço",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Quem formulou a Teoria da Relatividade Geral em 1915?",
@@ -140,7 +140,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 11,
     category: "ciencia",
-    categoryLabel: "🔬 Ciência & Espaço",
+    categoryLabel: "Ciência & Espaço",
     difficulty: "dificil",
     difficultyLabel: "Difícil",
     question: "Qual é a menor partícula elementar constituinte da matéria conhecida na física moderna?",
@@ -155,7 +155,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 12,
     category: "gerais",
-    categoryLabel: "🌍 Conhecimentos Gerais",
+    categoryLabel: "Conhecimentos Gerais",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Qual é o maior oceano do planeta Terra?",
@@ -166,7 +166,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 13,
     category: "gerais",
-    categoryLabel: "🌍 Conhecimentos Gerais",
+    categoryLabel: "Conhecimentos Gerais",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Quantos continentes existem tradicionalmente no modelo geográfico mais adotado?",
@@ -177,7 +177,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 14,
     category: "gerais",
-    categoryLabel: "🌍 Conhecimentos Gerais",
+    categoryLabel: "Conhecimentos Gerais",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Qual moeda oficial é utilizada no Japão?",
@@ -188,7 +188,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 15,
     category: "gerais",
-    categoryLabel: "🌍 Conhecimentos Gerais",
+    categoryLabel: "Conhecimentos Gerais",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Em que país se originou o jogo de xadrez em suas versões ancestrais conhecidas como Chaturanga?",
@@ -199,7 +199,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 16,
     category: "gerais",
-    categoryLabel: "🌍 Conhecimentos Gerais",
+    categoryLabel: "Conhecimentos Gerais",
     difficulty: "dificil",
     difficultyLabel: "Difícil",
     question: "Qual é a montanha mais alta do mundo medida da sua base submarina até o pico?",
@@ -214,7 +214,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 17,
     category: "historia",
-    categoryLabel: "🏛️ História & Geografia",
+    categoryLabel: "História & Geografia",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "Em que continente localizam-se as famosas Pirâmides de Gizé?",
@@ -225,7 +225,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 18,
     category: "historia",
-    categoryLabel: "🏛️ História & Geografia",
+    categoryLabel: "História & Geografia",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Qual cidade é a capital da Austrália?",
@@ -236,7 +236,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 19,
     category: "historia",
-    categoryLabel: "🏛️ História & Geografia",
+    categoryLabel: "História & Geografia",
     difficulty: "medio",
     difficultyLabel: "Médio",
     question: "Em que ano ocorreu a queda do Muro de Berlim, marcando o fim da Guerra Fria?",
@@ -247,7 +247,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 20,
     category: "historia",
-    categoryLabel: "🏛️ História & Geografia",
+    categoryLabel: "História & Geografia",
     difficulty: "dificil",
     difficultyLabel: "Difícil",
     question: "Qual civilização antiga construiu a cidade histórica de Machu Picchu no Peru?",

@@ -84,6 +84,7 @@ online-quiz-app/
 │   └── animations.css    # Keyframes de animações (shake, pop-in, fade, bounce)
 │
 ├── js/
+│   ├── icons.js          # Biblioteca de ícones vetoriais SVG (substitui emojis por ícones nítidos)
 │   ├── questions.js      # Banco de dados de perguntas categorizadas com explicações
 │   ├── audio.js          # Síntese sonora nativa procedural com Web Audio API
 │   ├── storage.js        # Camada de abstração e persistência com LocalStorage
@@ -124,14 +125,18 @@ online-quiz-app/
   - `shake` para fornecer feedback visual imediato ao errar uma questão.
   - `pulse-danger` para criar senso de urgência quando o temporizador atinge os últimos 3 segundos.
 
-### 5. `js/questions.js`
+### 5. `js/icons.js`
+- **O que faz:** Centraliza toda a biblioteca de ícones vetoriais SVG (estilo Lucide/Feather).
+- **Vantagens:** Garante visual corporativo e nítido em qualquer dispositivo, substituindo completamente emojis por ícones vetoriais escaláveis que herdam as cores do tema via CSS (`currentColor`).
+
+### 6. `js/questions.js`
 - **O que faz:** Atua como o repositório de dados com as perguntas do jogo.
 - **Estrutura de cada pergunta:**
   ```javascript
   {
     id: 1,
     category: "programacao",
-    categoryLabel: "💻 Programação",
+    categoryLabel: "Programação",
     difficulty: "facil",
     difficultyLabel: "Fácil",
     question: "O que significa a sigla HTML?",
@@ -141,14 +146,14 @@ online-quiz-app/
   }
   ```
 
-### 6. `js/audio.js`
+### 7. `js/audio.js`
 - **O que faz:** Gera efeitos sonoros em tempo real através da classe nativa `AudioContext` do navegador.
 - **Vantagens:**
   - Elimina a necessidade de arquivos pesados de áudio (.mp3 / .wav).
   - Sintetiza frequências sonoras com osciladores e envelopes de volume controlados.
   - Sons incluídos: clique, acerto (acorde alegre), erro (grave), tempo esgotado e fanfarra final.
 
-### 7. `js/storage.js`
+### 8. `js/storage.js`
 - **O que faz:** Encapsula e centraliza todas as chamadas ao `window.localStorage`.
 - **Responsabilidades:**
   - Recuperar e salvar preferências de tema (`light`/`dark`).
@@ -156,7 +161,7 @@ online-quiz-app/
   - Lembrar o último nome de jogador utilizado.
   - Gerenciar a lista de pontuações do Top 10 com ordenação automática por pontuação e precisão.
 
-### 8. `js/app.js`
+### 9. `js/app.js`
 - **O que faz:** O "cérebro" da aplicação. Orquestra a lógica de jogo, eventos e o ciclo de vida da partida.
 - **Principais responsabilidades:**
   - **Filtro e Embaralhamento:** Aplica o algoritmo de Fisher-Yates para garantir aleatoriedade.

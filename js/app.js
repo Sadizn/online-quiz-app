@@ -5,7 +5,7 @@
  * Responsável por gerenciar:
  * 1. Estado da partida (perguntas, pontuação, streak, timer, respostas)
  * 2. Transição entre telas (Boas-vindas -> Quiz -> Resultados)
- * 3. Renderização dinâmica de componentes na DOM
+ * 3. Renderização dinâmica de componentes na DOM utilizando ícones vetoriais (SVG)
  * 4. Interatividade via clique e atalhos de teclado (1-4, Enter, Esc)
  * 5. Sistema de temas (Claro/Escuro) e efeitos sonoros
  */
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     badgeCategory: document.getElementById('badge-category'),
     badgeCounter: document.getElementById('badge-counter'),
     badgeStreak: document.getElementById('badge-streak'),
+    streakText: document.getElementById('streak-text'),
     timerBox: document.getElementById('timer-box'),
     timerSeconds: document.getElementById('timer-seconds'),
     scoreValue: document.getElementById('quiz-score-val'),
@@ -130,11 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateThemeIcon(theme) {
-    DOM.themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    DOM.themeIcon.innerHTML = theme === 'dark' ? Icons.sun : Icons.moon;
   }
 
   function updateSoundIcon(isMuted) {
-    DOM.soundIcon.textContent = isMuted ? '🔇' : '🔊';
+    DOM.soundIcon.innerHTML = isMuted ? Icons.volumeX : Icons.volume;
   }
 
   // ==========================================================================
@@ -152,12 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 5. TOAST NOTIFICATIONS (FEEDBACK VISUAL RÁPIDO)
+  // 5. TOAST NOTIFICATIONS COM ÍCONES VETORIAIS
   // ==========================================================================
-  function showToast(message, icon = 'ℹ️', duration = 3000) {
+  function showToast(message, iconName = 'info', duration = 3000) {
     if (toastTimeout) clearTimeout(toastTimeout);
 
-    DOM.toastIcon.textContent = icon;
+    DOM.toastIcon.innerHTML = Icons[iconName] || Icons.info;
     DOM.toastText.textContent = message;
     DOM.toast.classList.add('show');
 
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rawName = DOM.playerNameInput.value.trim();
     if (!rawName) {
       DOM.playerNameInput.focus();
-      showToast('Por favor, digite seu nome ou apelido para começar!', '⚠️');
+      showToast('Por favor, digite seu nome ou apelido para começar!', 'alertTriangle');
       return;
     }
 
@@ -196,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filtered = filtered.filter(q => q.difficulty === selectedDifficulty);
     }
 
-    // Caso o filtro resulte em menos perguntas que o solicitado, pegamos as disponíveis ou relaxamos o filtro de dificuldade
+    // Caso o filtro resulte em menos perguntas que o solicitado, relaxa o filtro
     if (filtered.length < selectedAmount) {
       if (selectedCategory !== 'todas') {
         filtered = QUIZ_QUESTIONS.filter(q => q.category === selectedCategory);
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalQuestions = filtered.slice(0, selectedAmount);
 
     if (finalQuestions.length === 0) {
-      showToast('Nenhuma pergunta encontrada para os critérios selecionados!', '⚠️');
+      showToast('Nenhuma pergunta encontrada para os critérios selecionados!', 'alertTriangle');
       return;
     }
 
@@ -262,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Atualiza badge de sequência de acertos (Streak)
     if (State.streak >= 2) {
-      DOM.badgeStreak.textContent = `🔥 x${State.streak} Bônus`;
+      DOM.streakText.textContent = `x${State.streak} Bônus`;
       DOM.badgeStreak.classList.add('active');
     } else {
       DOM.badgeStreak.classList.remove('active');
@@ -347,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isCorrect) {
       chosenBtn.classList.add('correct');
       const icon = chosenBtn.querySelector('.option-icon');
-      if (icon) icon.textContent = '✅';
+      if (icon) icon.innerHTML = Icons.check;
 
       State.correctAnswers++;
       State.streak++;
@@ -356,12 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Cálculo da Pontuação:
-      // Base da dificuldade (Fácil: 100, Médio: 150, Difícil: 200)
       let basePoints = 100;
       if (question.difficulty === 'medio') basePoints = 150;
       if (question.difficulty === 'dificil') basePoints = 200;
 
-      // Bônus de rapidez (até +50 pontos adicionais se respondeu rápido)
+      // Bônus de rapidez
       const speedBonus = Math.round((State.currentTimeLeft / State.timePerQuestion) * 50);
 
       // Multiplicador por sequência de acertos
@@ -383,14 +383,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (chosenBtn) {
         chosenBtn.classList.add('wrong', 'animate-shake');
         const icon = chosenBtn.querySelector('.option-icon');
-        if (icon) icon.textContent = '❌';
+        if (icon) icon.innerHTML = Icons.x;
       }
 
       // Destaca qual era a alternativa correta
       if (correctBtn) {
         correctBtn.classList.add('correct');
         const icon = correctBtn.querySelector('.option-icon');
-        if (icon) icon.textContent = '✅';
+        if (icon) icon.innerHTML = Icons.check;
       }
 
       State.streak = 0;
@@ -416,11 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.btnNext.disabled = false;
     DOM.btnNext.focus();
 
-    // Se for a última pergunta, muda texto do botão
+    // Se for a última pergunta, ajusta texto e ícone do botão
     if (State.currentIndex === State.questions.length - 1) {
-      DOM.btnNext.innerHTML = '<span>Ver Resultados</span> 🏆';
+      DOM.btnNext.innerHTML = `<span>Ver Resultados</span> ${Icons.trophy}`;
     } else {
-      DOM.btnNext.innerHTML = '<span>Avançar</span> ➔';
+      DOM.btnNext.innerHTML = `<span>Avançar</span> ${Icons.arrowRight}`;
     }
   }
 
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
     State.isAnswered = true;
 
     soundFX.playTimeout();
-    showToast('Tempo esgotado para esta questão!', '⏰');
+    showToast('Tempo esgotado para esta questão!', 'clock');
 
     const question = State.questions[State.currentIndex];
     const optionButtons = DOM.optionsList.querySelectorAll('.option-btn');
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (correctBtn) {
       correctBtn.classList.add('correct');
       const icon = correctBtn.querySelector('.option-icon');
-      if (icon) icon.textContent = '✅';
+      if (icon) icon.innerHTML = Icons.check;
     }
 
     State.streak = 0;
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.btnNext.focus();
 
     if (State.currentIndex === State.questions.length - 1) {
-      DOM.btnNext.innerHTML = '<span>Ver Resultados</span> 🏆';
+      DOM.btnNext.innerHTML = `<span>Ver Resultados</span> ${Icons.trophy}`;
     }
   }
 
@@ -498,30 +498,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalTimeSeconds = Math.round((Date.now() - State.startTime) / 1000);
     State.totalTimeSpentSeconds = totalTimeSeconds;
 
-    // Atualiza textos e ícones baseados no desempenho
-    let trophy = '🏆';
-    let title = 'Incrível! Mestre Supremo!';
-    let message = `Sensacional, ${State.playerName}! Você dominou o desafio com perfeição!`;
+    // Atualiza ilustração e textos baseados no desempenho
+    let trophySvg = Icons.trophy;
+    let title = 'Mestre Supremo!';
+    let message = `Sensacional, ${State.playerName}! Você atingiu um domínio impecável do conteúdo!`;
 
     if (accuracy >= 90) {
-      trophy = '🏆';
-      title = 'Incrível! Mestre Supremo!';
+      trophySvg = Icons.trophy;
+      title = 'Mestre Supremo!';
       message = `Sensacional, ${State.playerName}! Você atingiu um domínio impecável!`;
     } else if (accuracy >= 70) {
-      trophy = '🥇';
+      trophySvg = Icons.medal;
       title = 'Excelente Desempenho!';
       message = `Muito bem, ${State.playerName}! Seu conhecimento é impressionante!`;
     } else if (accuracy >= 50) {
-      trophy = '🥈';
-      title = 'Bom Trabalho!';
+      trophySvg = Icons.medal;
+      title = 'Bom Desempenho!';
       message = `Bom jogo, ${State.playerName}! Com um pouco mais de treino você chega ao topo!`;
     } else {
-      trophy = '📚';
+      trophySvg = Icons.target;
       title = 'Continue Praticando!';
       message = `Não desanime, ${State.playerName}! O conhecimento se constrói passo a passo!`;
     }
 
-    DOM.resultTrophy.textContent = trophy;
+    DOM.resultTrophy.innerHTML = trophySvg;
+    const resultSvg = DOM.resultTrophy.querySelector('svg');
+    if (resultSvg) {
+      resultSvg.classList.add('app-icon-lg');
+    }
+
     DOM.resultTitle.textContent = title;
     DOM.resultMessage.textContent = message;
 
@@ -575,25 +580,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (list.length === 0) {
       DOM.leaderboardContent.innerHTML = `
-        <div style="text-align: center; padding: 2rem 1rem; color: var(--text-muted);">
-          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🏅</span>
-          <p>Nenhuma pontuação registrada ainda.</p>
+        <div style="text-align: center; padding: 2.5rem 1rem; color: var(--text-muted);">
+          <div style="margin-bottom: 0.75rem; color: var(--text-muted);">${Icons.medal}</div>
+          <p style="font-weight: 600;">Nenhuma pontuação registrada ainda.</p>
           <small>Jogue uma partida para inaugurar o placar!</small>
         </div>
       `;
+      const svg = DOM.leaderboardContent.querySelector('svg');
+      if (svg) svg.classList.add('app-icon-lg');
       return;
     }
-
-    const medals = ['🥇', '🥈', '🥉'];
 
     list.forEach((entry, idx) => {
       const item = document.createElement('div');
       item.className = 'leaderboard-item animate-fade-in';
 
-      const rankBadge = idx < 3 ? medals[idx] : `#${idx + 1}`;
+      let rankBadgeHtml = '';
+      if (idx === 0) {
+        rankBadgeHtml = `<div class="leaderboard-rank rank-1" title="1º Lugar">1º</div>`;
+      } else if (idx === 1) {
+        rankBadgeHtml = `<div class="leaderboard-rank rank-2" title="2º Lugar">2º</div>`;
+      } else if (idx === 2) {
+        rankBadgeHtml = `<div class="leaderboard-rank rank-3" title="3º Lugar">3º</div>`;
+      } else {
+        rankBadgeHtml = `<div class="leaderboard-rank rank-other">#${idx + 1}</div>`;
+      }
 
       item.innerHTML = `
-        <div class="leaderboard-rank">${rankBadge}</div>
+        ${rankBadgeHtml}
         <div class="leaderboard-player">
           <span class="leaderboard-name">${escapeHtml(entry.playerName)}</span>
           <span class="leaderboard-meta">${escapeHtml(entry.categoryLabel)} • ${entry.correctAnswers}/${entry.totalQuestions} acertos (${entry.accuracy}%) • ${entry.date}</span>
@@ -609,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (confirm('Tem certeza de que deseja zerar todo o histórico de pontuações?')) {
       StorageManager.clearLeaderboard();
       renderLeaderboard();
-      showToast('Placar de líderes reiniciado com sucesso!', '🗑️');
+      showToast('Placar de líderes reiniciado com sucesso!', 'trash');
     }
   }
 
@@ -641,24 +655,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const userAnsText = item.selectedIndex >= 0 ? item.options[item.selectedIndex] : 'Tempo esgotado (sem resposta)';
       const correctAnsText = item.options[item.correctIndex];
 
+      const statusIcon = item.isCorrect ? Icons.check : Icons.x;
+
       div.innerHTML = `
         <div class="review-question-text">
           ${index + 1}. ${escapeHtml(item.question)}
         </div>
         <div class="review-answer-line">
           <strong>Sua resposta:</strong> 
-          <span style="color: ${item.isCorrect ? 'var(--success)' : 'var(--danger)'};">
-            ${item.isCorrect ? '✓ ' : '✗ '}${escapeHtml(userAnsText)}
+          <span style="display: inline-flex; align-items: center; gap: 0.35rem; color: ${item.isCorrect ? 'var(--success)' : 'var(--danger)'};">
+            ${statusIcon} ${escapeHtml(userAnsText)}
           </span>
         </div>
         ${!item.isCorrect ? `
           <div class="review-answer-line">
             <strong>Resposta correta:</strong> 
-            <span style="color: var(--success);">✓ ${escapeHtml(correctAnsText)}</span>
+            <span style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--success);">
+              ${Icons.check} ${escapeHtml(correctAnsText)}
+            </span>
           </div>
         ` : ''}
         <div class="review-explanation">
-          💡 ${escapeHtml(item.explanation)}
+          ${Icons.lightbulb}
+          <span>${escapeHtml(item.explanation)}</span>
         </div>
       `;
 
@@ -672,9 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleShareScore() {
     const total = State.questions.length;
     const accuracy = Math.round((State.correctAnswers / total) * 100);
-    const textToShare = `🧠 QuizMaster Challenge!\n` +
-      `Acabei de marcar ${State.score} pontos com ${accuracy}% de precisão (${State.correctAnswers}/${total}) no QuizMaster!\n` +
-      `Será que você consegue me superar? 🚀`;
+    const textToShare = `QuizMaster | Marquei ${State.score} pontos com ${accuracy}% de precisão (${State.correctAnswers}/${total}) no QuizMaster!\nSerá que você consegue me superar?`;
 
     if (navigator.share) {
       navigator.share({
@@ -684,12 +701,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }).catch(() => {});
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(textToShare).then(() => {
-        showToast('Resultado copiado para a área de transferência!', '📋');
+        showToast('Resultado copiado para a área de transferência!', 'fileText');
       }).catch(() => {
-        showToast('Não foi possível copiar automaticamente.', '⚠️');
+        showToast('Não foi possível copiar automaticamente.', 'alertTriangle');
       });
     } else {
-      showToast('Compartilhamento não suportado neste navegador.', '⚠️');
+      showToast('Compartilhamento não suportado neste navegador.', 'alertTriangle');
     }
   }
 
