@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizMaster - Teste Seus Conhecimentos</title>
+  
+  <!-- Meta tags informativas e SEO -->
+  <meta name="description" content="Aplicação interativa de quiz desenvolvida com HTML5, CSS3 moderno e JavaScript puro.">
+  <meta name="theme-color" content="#4f46e5">
+
+  <!-- Folhas de Estilos Modulares -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- ====================================================================
+       CONTAINER PRINCIPAL DA APLICAÇÃO
+       ==================================================================== -->
+  <div class="app-container">
+
+    <!-- BARRA SUPERIOR (HEADER) COM CONTROLES -->
+    <header class="topbar" role="banner">
+      <div class="brand-badge">
+        <span class="brand-icon" aria-hidden="true">🧠</span>
+        <span>QuizMaster</span>
+      </div>
+
+      <div class="topbar-controls">
+        <!-- Botão Abrir Placar -->
+        <button id="btn-open-leaderboard" class="icon-btn" title="Ver Placar de Líderes" aria-label="Ver Placar de Líderes">
+          🏆
+        </button>
+
+        <!-- Botão Alternar Efeitos Sonoros -->
+        <button id="btn-toggle-sound" class="icon-btn" title="Ativar/Desativar Som" aria-label="Alternar Efeitos Sonoros">
+          <span id="sound-icon">🔊</span>
+        </button>
+
+        <!-- Botão Alternar Tema Claro/Escuro -->
+        <button id="btn-toggle-theme" class="icon-btn" title="Alternar Modo Escuro" aria-label="Alternar Tema Claro e Escuro">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         TELA 1: BOAS-VINDAS E CONFIGURAÇÃO DA PARTIDA
+         ==================================================================== -->
+    <main id="screen-welcome" class="screen active animate-fade-in" role="main">
+      <div class="welcome-header">
+        <span class="welcome-badge">Desafio Interativo</span>
+        <h1 class="welcome-title">Pronto para testar sua mente?</h1>
+        <p class="welcome-subtitle">Personalize seu jogo, responda no menor tempo possível e alcance o topo do ranking!</p>
+      </div>
+
+      <form id="quiz-setup-form" class="quiz-setup-form" onsubmit="return false;">
+        <!-- Nome do Jogador -->
+        <div class="form-group">
+          <label for="player-name-input" class="form-label">
+            <span>👤</span> Seu Nome ou Apelido:
+          </label>
+          <input 
+            type="text" 
+            id="player-name-input" 
+            class="form-input" 
+            placeholder="Ex: Ana Silva" 
+            maxlength="25"
+            required
+            autocomplete="name"
+          >
+        </div>
+
+        <!-- Categoria das Perguntas -->
+        <div class="form-group">
+          <label for="category-select" class="form-label">
+            <span>🎯</span> Escolha o Tema:
+          </label>
+          <select id="category-select" class="form-select">
+            <option value="todas">🎲 Misto (Todas as Categorias)</option>
+            <option value="programacao">💻 Programação & Tecnologia</option>
+            <option value="ciencia">🔬 Ciência & Espaço</option>
+            <option value="gerais">🌍 Conhecimentos Gerais</option>
+            <option value="historia">🏛️ História & Geografia</option>
+          </select>
+        </div>
+
+        <!-- Grau de Dificuldade -->
+        <div class="form-group">
+          <span class="form-label"><span>⚡</span> Nível de Dificuldade:</span>
+          <div class="pills-group" role="radiogroup" aria-label="Dificuldade">
+            <label class="pill-option">
+              <input type="radio" name="difficulty" value="todas" checked>
+              <span class="pill-label">🎲 Todas</span>
+            </label>
+            <label class="pill-option">
+              <input type="radio" name="difficulty" value="facil">
+              <span class="pill-label">🌱 Fácil</span>
+            </label>
+            <label class="pill-option">
+              <input type="radio" name="difficulty" value="medio">
+              <span class="pill-label">⚖️ Médio</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Quantidade de Questões -->
+        <div class="form-group">
+          <label for="amount-select" class="form-label">
+            <span>🔢</span> Número de Perguntas:
+          </label>
+          <select id="amount-select" class="form-select">
+            <option value="5">5 Perguntas (Rápido - ~2 min)</option>
+            <option value="10" selected>10 Perguntas (Padrão - ~4 min)</option>
+            <option value="15">15 Perguntas (Desafio Completo)</option>
+          </select>
+        </div>
+
+        <!-- Ação Iniciar -->
+        <div class="welcome-actions">
+          <button type="submit" id="btn-start-quiz" class="btn btn-primary btn-block">
+            <span>🚀</span> Iniciar Quiz
+          </button>
+        </div>
+      </form>
+    </main>
+
+    <!-- ====================================================================
+         TELA 2: ÁREA DE PERGUNTAS DO QUIZ
+         ==================================================================== -->
+    <section id="screen-quiz" class="screen" aria-live="polite" aria-label="Área de Perguntas">
+      <!-- Barra Superior de Progresso -->
+      <div class="progress-container" aria-hidden="true">
+        <div id="quiz-progress-bar" class="progress-bar"></div>
+      </div>
+
+      <!-- Cabeçalho Informativo da Pergunta -->
+      <div class="quiz-header">
+        <div class="header-badges">
+          <span id="badge-category" class="badge">💻 Categoria</span>
+          <span id="badge-counter" class="badge">Pergunta 1 de 10</span>
+          <span id="badge-streak" class="badge badge-streak" title="Sequência de Acertos">🔥 x2 Bônus</span>
+        </div>
+
+        <div class="header-badges">
+          <!-- Temporizador Regressivo -->
+          <div id="timer-box" class="timer-box" role="timer" aria-label="Tempo restante">
+            <span aria-hidden="true">⏱️</span>
+            <span id="timer-seconds">15s</span>
+          </div>
+          <!-- Pontuação Atual -->
+          <div class="badge quiz-score-pill">
+            <span id="quiz-score-val">0</span> pts
+          </div>
+        </div>
+      </div>
+
+      <!-- Enunciado da Questão -->
+      <div class="question-container">
+        <h2 id="question-text" class="question-text">Carregando pergunta...</h2>
+        <span id="question-meta" class="question-meta">Dificuldade: Normal</span>
+      </div>
+
+      <!-- Lista de Alternativas (A, B, C, D) -->
+      <div id="options-list" class="options-list" role="group" aria-label="Alternativas">
+        <!-- Inseridas dinamicamente pelo JavaScript -->
+      </div>
+
+      <!-- Caixa de Explicação Didática (Aparece após responder) -->
+      <div id="explanation-box" class="explanation-box" role="region" aria-live="assertive">
+        <div class="explanation-title">
+          <span>💡</span> Você sabia?
+        </div>
+        <p id="explanation-text">Explicação educativa sobre a resposta correta.</p>
+      </div>
+
+      <!-- Rodapé do Quiz com Dica e Botão Próximo -->
+      <div class="quiz-footer">
+        <div class="keyboard-hint" aria-hidden="true">
+          Dica: use teclas <kbd>1</kbd>-<kbd>4</kbd> para selecionar e <kbd>Enter</kbd> para avançar
+        </div>
+
+        <button id="btn-next-question" class="btn btn-primary" disabled>
+          <span>Avançar</span> ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TELA 3: TELA DE RESULTADOS E RESUMO
+         ==================================================================== -->
+    <section id="screen-results" class="screen animate-slide-up" aria-label="Resultados da Partida">
+      <div class="result-header">
+        <div id="result-trophy" class="trophy-icon" aria-hidden="true">🏆</div>
+        <h2 id="result-title" class="result-title">Excelente Desempenho!</h2>
+        <p id="result-message" class="result-subtitle">Você demonstrou grande domínio nos tópicos!</p>
+      </div>
+
+      <!-- Indicador Radial Animado de Pontuação -->
+      <div class="score-circle-container">
+        <div class="score-circle">
+          <svg class="score-svg" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="score-svg-bg" cx="50" cy="50" r="45"></circle>
+            <circle id="score-svg-circle" class="score-svg-progress" cx="50" cy="50" r="45"></circle>
+          </svg>
+          <div id="result-percentage" class="score-percentage-text">0%</div>
+        </div>
+      </div>
+
+      <!-- Grade de Métricas e Estatísticas -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">🎯</div>
+          <div class="stat-info">
+            <span id="stat-score" class="stat-value">0</span>
+            <span class="stat-label">Pontos Obtidos</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">✅</div>
+          <div class="stat-info">
+            <span id="stat-hits" class="stat-value">0/10</span>
+            <span class="stat-label">Perguntas Corretas</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">🔥</div>
+          <div class="stat-info">
+            <span id="stat-streak" class="stat-value">0</span>
+            <span class="stat-label">Maior Sequência</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" aria-hidden="true">⏳</div>
+          <div class="stat-info">
+            <span id="stat-time" class="stat-value">00:00</span>
+            <span class="stat-label">Tempo Total Gasto</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação Final -->
+      <div class="result-actions">
+        <button id="btn-restart-quiz" class="btn btn-primary btn-block">
+          <span>🔄</span> Jogar Novamente
+        </button>
+        <button id="btn-review-answers" class="btn btn-secondary btn-block">
+          <span>📝</span> Revisar Minhas Respostas
+        </button>
+        <button id="btn-share-score" class="btn btn-outline btn-block">
+          <span>📤</span> Compartilhar Desempenho
+        </button>
+        <button id="btn-back-home" class="btn btn-secondary btn-block">
+          <span>🏠</span> Menu Principal
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODAL 1: PLACAR DE LÍDERES (TOP 10 LOCAL)
+         ==================================================================== -->
+    <div id="modal-leaderboard" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="leaderboard-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="leaderboard-title" class="modal-title">
+            <span>🏆</span> Placar de Líderes
+          </h3>
+          <button id="btn-close-leaderboard" class="icon-btn" aria-label="Fechar ranking">✕</button>
+        </div>
+        <div class="modal-body">
+          <div id="leaderboard-content" class="leaderboard-list">
+            <!-- Renderizado dinamicamente -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-clear-leaderboard" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+            🗑️ Limpar Placar
+          </button>
+          <button id="btn-ok-leaderboard" class="btn btn-secondary">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         MODAL 2: REVISÃO DETALHADA DE RESPOSTAS
+         ==================================================================== -->
+    <div id="modal-review" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="review-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="review-title" class="modal-title">
+            <span>📝</span> Revisão da Partida
+          </h3>
+          <button id="btn-close-review" class="icon-btn" aria-label="Fechar revisão">✕</button>
+        </div>
+        <div class="modal-body">
+          <div id="review-content" class="review-list">
+            <!-- Renderizado dinamicamente -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-ok-review" class="btn btn-primary btn-block">
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICAÇÃO TOAST FLUTUANTE -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <span id="toast-icon">ℹ️</span>
+      <span id="toast-text">Mensagem de notificação</span>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="app-footer">
+      <p>Desenvolvido com <strong>HTML5, CSS3 & JavaScript</strong> nativo.</p>
+    </footer>
+
+  </div>
+
+  <!-- ====================================================================
+       SCRIPTS JAVASCRIPT MODULARES
+       ==================================================================== -->
+  <script src="js/questions.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
